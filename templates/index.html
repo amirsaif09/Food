@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chandausi Food</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      line-height: 1.6;
+      background: linear-gradient(to top right, #eb0e0e, #000000, #eb0e0e);
+      background-blend-mode: overlay;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #000000;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      background: -webkit-linear-gradient(#d0d0d0, #e61616);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      padding: 0.5rem 1rem;
+      padding-right: 2.5rem;
+      border-radius: 20px;
+      border: none;
+      background: #333;
+      color: white;
+      width: 0;
+      transition: width 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .search-input.active {
+      width: 200px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      padding: 0.5rem;
+    }
+
+    .mobile-nav-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-menu li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-menu li a:hover {
+      color: #ff4500;
+    }
+
+    @media (max-width: 767px) {
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: #1a1a1a;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+      }
+
+      .nav-menu.active {
+        right: 0;
+        transform: translateX(0);
+      }
+
+      .nav-menu li {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #333;
+      }
+
+      .nav-menu li:last-child {
+        border-bottom: none;
+      }
+
+      .search-input.active {
+        width: 150px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .mobile-nav-toggle {
+        display: none;
+      }
+
+      .search-input {
+        width: 200px;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #000000, #0f0f0f);
+      background-image: url('papa image.jpg');
+      opacity: 0.9;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 10px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ff4500;
+      animation: fadeInUp 1s ease-in-out;
+      transition: text-shadow 0.3s ease-in-out;
+      text-shadow: 0 0 1px #ff4500, 0 0 2px #ff4500, 0 0 4px #ff4500, 0 0 8px #ff4500;
+      margin-bottom: 1rem;
+    }
+
+    .glow-text:hover {
+      text-shadow: 0 0 5px #ff4500, 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 40px #ff4500;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero button {
+      padding: 0.7rem 1.5rem;
+      border: 2px solid #ff4500;
+      background: transparent;
+      color: #ff4500;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .hero button:hover {
+      background: #ff4500;
+      color: #fff;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 2rem 0;
+      color: #ffffff;
+    }
+
+    /* Trending Section with Carousel */
+    .trending-section {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .cards-container {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      min-width: 100%;
+      padding: 0 1rem;
+    }
+
+    .card {
+      background: transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 69, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      background: rgba(30, 30, 30, 0.8);
+      flex-grow: 1;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .card-content h3 {
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 0;
+    }
+
+    /* Carousel Navigation */
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+      gap: 0.5rem;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #555;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: #ff4500;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 1024px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .card img {
+        height: 180px;
+      }
+
+      .card-content {
+        padding: 1rem;
+      }
+    }
+
+    /* Animation for card entrance */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .card {
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    .card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    .card:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+
+    .card:nth-child(8) {
+      animation-delay: 0.8s;
+    }
+
+    .reviews {
+      padding: 2rem 1rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .review-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .review {
+      background: #1f1f1f;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .review h4 {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .review p {
+      font-style: italic;
+      color: #ddd;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #000000;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+
+    .social-icons {
+      margin-top: 1rem;
+    }
+
+    .social-icon {
+      margin: 0 10px;
+      font-size: 1.4rem;
+      text-decoration: none;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.2);
+    }
+
+    /* Brand Colors */
+    .social-icon.facebook {
+      color: #1877F2;
+    }
+
+    .social-icon.instagram {
+      color: #E1306C;
+    }
+
+    .social-icon.youtube {
+      color: #FF0000;
+    }
+
+    .social-icon.twitter {
+      color: #1DA1F2;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .special-offers {
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+    }
+
+    .coming-soon-box {
+      background: #1a1a1a;
+      margin: 1rem auto;
+      max-width: 600px;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px dashed #ff4500;
+      font-size: 1.2rem;
+      color: #ffcccb;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .glow-coming {
+      color: #ff4500;
+      text-shadow: 0 0 5px #ff4500, 0 0 10px #ff4500;
+      font-weight: bold;
+    }
+
+    .glow-coming:hover {
+      text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500;
+    }
+
+    .newsletter {
+      background: rgba(240, 234, 234, 0.003);
+      filter: blur(50%);
+      padding: 2rem 1rem;
+      text-align: center;
+      border-top: none;
+      margin-top: 3rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .newsletter-desc {
+      color: #ccc;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .newsletter-form input {
+      padding: 0.8rem;
+      width: 100%;
+      max-width: 300px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .newsletter-form button {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      background: #ff4500;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: #e63e00;
+    }
+
+    .category-menu {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background-color: #140b0b;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 2px solid #ff4500;
+      z-index: 1;
+      transition: bottom 0.5s ease-in-out;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .category-menu.active {
+      bottom: 0;
+    }
+
+    .category-menu ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+
+    .category-menu ul li {
+      padding: 0.8rem 0;
+      font-size: 1rem;
+      border-bottom: 1px solid #333;
+      cursor: pointer;
+    }
+
+    .category-menu ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .category-menu ul li:hover {
+      color: #ff4500;
+    }
+
+    .show-menu-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 0.8rem 1.5rem;
+      background: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .show-menu-btn:hover {
+      background-color: #e63e00;
+    }
+
+    .close-menu-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .close-menu-btn:hover {
+      color: #ff4500;
+    }
+
+    /* Review form in menu */
+    .review-toggle-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 0.8rem 1.5rem;
+      background: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .review-toggle-btn:hover {
+      background-color: #e63e00;
+    }
+
+    .review-form-container {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background-color: #1a1a1a;
+      color: white;
+      padding: 2rem 1rem;
+      border-top: 2px solid #ff4500;
+      z-index: 999;
+      transition: bottom 0.5s ease-in-out;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .review-form-container.active {
+      bottom: 0;
+    }
+
+    .close-review-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .close-review-btn:hover {
+      color: #ff4500;
+    }
+
+    .review-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .review-form h2 {
+      text-align: center;
+      color: #ff4500;
+      margin-bottom: 1rem;
+    }
+
+    .review-form input,
+    .review-form textarea {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .review-form button {
+      background: #ff4500;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .review-form button:hover {
+      background: #e63e00;
+    }
+
+    .star-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #ffcc00;
+    }
+
+    .stars input {
+      display: none;
+    }
+
+    .stars {
+      direction: rtl;
+    }
+
+    .stars label {
+      font-size: 1.5rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .stars input:checked~label,
+    .stars label:hover,
+    .stars label:hover~label {
+      color: #ffcc00;
+    }
+
+    /* Overlay for mobile menu */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .logo {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo"><a href='/'>CHANDAUSI FOOD</a></div>
+    <div class="header-right">
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search...">
+        <button class="search-btn" id="searchToggle">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <button class="mobile-nav-toggle" id="mobileNavToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <nav>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="glow-text">Welcome to Chandausi Food</h1>
+      <p>Experience the best food in town with our wide variety of delicious dishes.</p>
+      <button onclick="toggleCategories()"><i class="fas fa-utensils"></i> View Menu</button>
+    </div>
+
+    <div class="category-menu" id="categoryMenu">
+      <button class="close-menu-btn" onclick="toggleCategories()">×</button>
+      <h2>Food Categories</h2>
+      <ul>
+        <li>Home</li>
+        <li><a href="sweet.html">Sweet</a> </li>
+        <li><a href="chinese.html">Chinese</a></li>
+        <li><a href="indian.html">Indian</a></li>
+        <li><a href="drinks.html">Drinks</a></li>
+        <li><a href="italian.html">Italian</a></li>
+        <li><a href="non-vegetarian.html">Non-Vegetarian</a></li>
+        <li><a href="vegetarian.html">Vegetarian</a></li>
+        <li><a href="fast-food.html">Fast Food</a></li>
+        <li><a href="desserts.html">Desserts</a></li>
+        <li><a href="breakfast.html">Breakfast</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="trending-section">
+    <h2 class="section-title">Trending & Hots</h2>
+    <div class="cards-container" id="cardsContainer">
+      <div class="cards" id="cardsSlide1">
+        <div class="card">
+          <img src="https://i0.wp.com/prasuma.com/wp-content/uploads/2020/11/Tandoori-Momo.jpg?fit=800%2C470&ssl=1"
+            alt="Tandoori Momos">
+          <div class="card-content">
+            <h3>Tandoori Momos</h3>
+            <p>We celebrate the rich heritage of Tandoori Momos of Chilli Inn, Station Road Chandausi.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://www.shutterstock.com/image-photo/blue-lagoon-mojitoa-mocktail-drink-600nw-2198862581.jpg"
+            alt="Blue Lagoon">
+          <div class="card-content">
+            <h3>Blue Lagoon</h3>
+            <p>Fusion of spice and heritage from Devarkhera, Chandausi.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="https://www.shutterstock.com/image-photo/deliciously-spiced-chicken-tikka-kabab-600nw-2495838045.jpg"
+            alt="Chicken Tikka">
+          <div class="card-content">
+            <h3>Chicken Tikka</h3>
+            <p>Authentic Indian flavors crafted with dedication and care.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="https://www.foodandwine.com/thmb/XdFd-DvTtouryLCjeCqwhfmmK-A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/molten-chocolate-cake-FT-RECIPE0220-0a33d7d0ab0c45588f7bfe742d33a9bc.jpg"
+            alt="Chocolate Lava">
+          <div class="card-content">
+            <h3>Chocolate Lava</h3>
+            <p>Decadent and rich dessert to satisfy your sweet cravings.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards" id="cardsSlide2">
+        <div class="card">
+          <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/08/veg-biryani-recipe-500x500.jpg"
+            alt="Veg Biryani">
+          <div class="card-content">
+            <h3>Veg Biryani</h3>
+            <p>Aromatic basmati rice cooked with fresh vegetables and spices.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://www.cookwithmanali.com/wp-content/uploads/2020/05/Masala-Dosa-Recipe-500x500.jpg"
+            alt="Masala Dosa">
+          <div class="card-content">
+            <h3>Masala Dosa</h3>
+            <p>Crispy rice crepe stuffed with spiced potato filling.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2020/01/paneer-butter-masala-1-500x500.jpg"
+            alt="Paneer Butter Masala">
+          <div class="card-content">
+            <h3>Paneer Butter Masala</h3>
+            <p>Creamy and rich cottage cheese in tomato gravy.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2021/06/dal-makhani-1-500x500.jpg"
+            alt="Dal Makhani">
+          <div class="card-content">
+            <h3>Dal Makhani</h3>
+            <p>Slow-cooked black lentils with butter and cream.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-nav" id="carouselNav">
+      <div class="carousel-dot active" data-slide="0"></div>
+      <div class="carousel-dot" data-slide="1"></div>
+    </div>
+  </section>
+
+  <section class="special-offers">
+    <h2 class="section-title">Special Offers!!!</h2>
+    <div class="coming-soon-box">
+      <p>🎉 Exciting offers are <span class="glow-coming">Coming Soon</span> — Stay tuned!</p>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <h2 class="section-title">Customer Reviews</h2>
+    <div id="review-container" class="review-cards">
+      <!-- <div  class="review">
+        <h4>Rahul Sharma</h4>
+        <div class="star-rating">★★★★★</div>
+        <p>"The Tandoori Momos are absolutely fantastic! Best in town!"</p>
+      </div> -->
+      <!-- <div class="review">
+        <h4>Priya Singh</h4>
+        <div class="star-rating">★★★★☆</div>
+        <p>"Great variety and authentic flavors. Will visit again!"</p>
+      </div>
+      <div class="review">
+        <h4>Amit Patel</h4>
+        <div class="star-rating">★★★★★</div>
+        <p>"Excellent service and delicious food. Highly recommended!"</p>
+      </div> -->
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <h2 class="section-title">Subscribe to Our Newsletter</h2>
+    <p class="newsletter-desc">Get new exciting offers straight to your inbox!</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  <button class="review-toggle-btn" id="reviewToggle">
+    <i class="fas fa-pen"></i> Add Review
+  </button>
+
+  <!-- Review form container -->
+  <div class="review-form-container" id="reviewFormContainer">
+    <button class="close-review-btn" id="closeReviewBtn">×</button>
+    <form id="myform" class="review-form" action="http://127.0.0.1:5000/review" method="post">
+      <h2>Add Your Review</h2>
+      <input type="text" name="name1" placeholder="Your Name" required />
+      <input type="text" name="restaurant" placeholder="Restaurant Name" required />
+      <input type="text" name="food" placeholder="Food Name" required />
+
+      <div class="star-rating">
+        <label>Rating:</label>
+        <div class="stars">
+          <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+          <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+          <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+          <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+          <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+        </div>
+      </div>
+
+
+      <textarea name="comment" placeholder="Your comments..." rows="4" required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>Copyright © 2025 Chandausi Food - All Rights Reserved.</p>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com" target="_blank" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+      <a href="https://twitter.com" target="_blank" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile navigation
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const navMenu = document.getElementById('navMenu');
+    const overlay = document.getElementById('overlay');
+    const review_container = document.getElementById('review-container');
+
+    const data = {{ review | tojson | safe }};
+    const addingReviewToPage = (userData) => {
+      review_container.innerHTML = "";
+
+      userData.forEach(user => {
+        console.log(user, 'user')
+        const card = document.createElement('div');
+        card.className = "review";
+
+        // Create star rating (★ repeated)
+        const stars = "★".repeat(user.rating || 5);  // Default to 5 if rating missing
+
+        card.innerHTML = `
+      <h4>${user.name}</h4>
+      <div class="star-rating">${stars}</div>
+      <p>"${user.comment}"</p>
+    `;
+
+        review_container.appendChild(card);
+      });
+
+    }
+
+    addingReviewToPage(data)
+
+    mobileNavToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    });
+
+    // Close mobile menu when clicking on overlay
+    overlay.addEventListener('click', function () {
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+
+    // Toggle search bar on mobile
+    const searchToggle = document.getElementById('searchToggle');
+    const searchInput = document.querySelector('.search-input');
+
+    searchToggle.addEventListener('click', function () {
+      if (window.innerWidth <= 767) {
+        searchInput.classList.toggle('active');
+      }
+    });
+
+    // Toggle food categories menu
+    function toggleCategories() {
+      const menu = document.getElementById('categoryMenu');
+      menu.classList.toggle('active');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (event) {
+      const menu = document.getElementById('categoryMenu');
+      const showBtn = document.querySelector('.show-menu-btn');
+
+      if (!menu.contains(event.target) && event.target !== showBtn && !showBtn.contains(event.target)) {
+        menu.classList.remove('active');
+      }
+    });
+
+    // Toggle review form
+    const reviewToggle = document.getElementById('reviewToggle');
+    const reviewFormContainer = document.getElementById('reviewFormContainer');
+    const closeReviewBtn = document.getElementById('closeReviewBtn');
+
+    reviewToggle.addEventListener('click', function () {
+      reviewFormContainer.classList.add('active');
+    });
+
+    closeReviewBtn.addEventListener('click', function () {
+      reviewFormContainer.classList.remove('active');
+    });
+
+    // Close review form when clicking outside
+    document.addEventListener('click', function (event) {
+      if (!reviewFormContainer.contains(event.target) &&
+        event.target !== reviewToggle &&
+        !reviewToggle.contains(event.target)) {
+        reviewFormContainer.classList.remove('active');
+      }
+    });
+
+    // Carousel functionality
+    const cardsContainer = document.getElementById('cardsContainer');
+    const carouselNav = document.getElementById('carouselNav');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let currentSlide = 0;
+    const slideCount = 2; // Number of slides
+
+    // Auto slide every 5 seconds
+    let slideInterval = setInterval(nextSlide, 5000);
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      cardsContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      // Update active dot
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+
+      // Reset timer when manually navigating
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideCount;
+      goToSlide(currentSlide);
+    }
+
+    // Add click event to dots
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToSlide(parseInt(dot.dataset.slide));
+      });
+    });
+
+    // Pause on hover
+    cardsContainer.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+
+    cardsContainer.addEventListener('mouseleave', () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+    });
+
+    form = document.getElementById('myform')
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/review', {
+          method: 'POST',
+          body: formData,
+        });
+
+        // Handle the response
+        const res = await response.json()
+        if (res.status == 200) {
+          form.reset();
+          alert('review submitted')
+          addingReviewToPage(res.review)
+
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+      }
+
+
+    })
+
+  </script>
+</body>
+
+</html>
